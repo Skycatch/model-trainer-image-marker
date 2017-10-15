@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Reusuable module for easy visual machine learning context training",
   "main": "dist/bundle.js",
+  "webpack": "dist/bundle.js",
+  "browser": "dist/bundle.js",
   "module": "src",
   "scripts": {
     "dev": "NODE_ENV=development ./node_modules/.bin/webpack-dev-server --config webpack.config.js",
