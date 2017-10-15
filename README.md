@@ -16,7 +16,7 @@ The css if applicable will be located in the `dist` folder of the node_module
 
 ## Interface
 
-Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](Image API)
+Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](API)
 
 URL can either be a http image url, or created from an in memory file with `window.URL.createObjectURL`
 
