@@ -1,20 +1,18 @@
 'use strict';
 
 import chai from 'chai';
+import Lib from '../dist/bundle.js';
 
 chai.expect();
 
 const expect = chai.expect;
 
-let lib;
-
-describe('Do my tests here', () => {
+describe('Library Tests', () => {
   before(() => {
-
   });
-  describe('when I need to test', () => {
-    it('should return test result', () => {
-      expect('TODO').to.be.equal('TODO');
+  describe('When I am referenced in an application', () => {
+    it('should return a function', () => {
+      expect(typeof(Lib)).to.be.equal('function');
     });
   });
 });

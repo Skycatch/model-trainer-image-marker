@@ -1,4 +1,4 @@
 'use strict';
 
 // ## Main Module
-module.exports = require('./dist/bundle.js');
+module.exports = require('./src/index.js');

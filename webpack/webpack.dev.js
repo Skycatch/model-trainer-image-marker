@@ -1,9 +1,9 @@
 'use strict';
 
+const PackageJSON = require('../package.json');
 const Path = require('path');
 const Webpack = require('webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const SvgStore = require('webpack-svgstore-plugin');
 
 module.exports = {
 
@@ -63,6 +63,8 @@ module.exports = {
 
 
   output: {
+    library: PackageJSON.name,
+    libraryTarget: 'commonjs2',
     path: Path.resolve(__dirname, '../dist'),
     filename: 'bundle.js'
   },
@@ -85,15 +87,6 @@ module.exports = {
       syntax: 'scss',
       failOnError: false,
       quiet: false
-    }),
-    new SvgStore({
-      // svgo options
-      svgoOptions: {
-        plugins: [
-          { removeTitle: true }
-        ]
-      },
-      prefix: 'icon'
     })
   ],
 
@@ -109,5 +102,7 @@ module.exports = {
     colors: true,
     reasons: true
 
-  }
+  },
+
+  target: 'web'
 };

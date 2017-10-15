@@ -1,5 +1,6 @@
 'use strict';
 
+const PackageJSON = require('../package.json');
 const Path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -52,6 +53,8 @@ module.exports = {
   },
 
   output: {
+    library: PackageJSON.name,
+    libraryTarget: 'commonjs2',
     path: Path.resolve(__dirname, '../dist'),
     filename: 'bundle.js'
   },
@@ -78,5 +81,7 @@ module.exports = {
   stats: {
     colors: true,
     reasons: true
-  }
+  },
+
+  target: 'web'
 };
