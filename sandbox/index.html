@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Example image point marker</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="./example.css" />
+</head>
+<body>
+  <body>
+    <div class="relative" style="width: 600px">
+      <svg id="system" width="100%" height="478"></svg>
+      <div class="float-right">
+        <ul>
+          <li>
+            <button onclick="resetZoom()">Reset Zoom</button>
+
+          </li>
+          <li>
+            <button onclick="zoomControlPoint()">Zoom to Mark</button>
+          </li>
+          <li>
+            <button onclick="clearMarker()">Remove Mark</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script src="bundle.js"></script>
+  <script src="example.js"></script>
+</body>
+</html>

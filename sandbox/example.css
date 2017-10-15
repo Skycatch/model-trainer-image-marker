@@ -1,0 +1,29 @@
+body {
+  /* Overwrite style */
+  background: #ccc;
+
+}
+body .relative {
+  position: relative;
+}
+body .float-right {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+body .float-right ul {
+
+}
+body .float-right ul li {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+  list-style-type: none;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 15px;
+  color: black;
+  font-weight: bold;
+}
