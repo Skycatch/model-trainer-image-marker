@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "webpack": "dist/bundle.js",
   "browser": {
-    "index.js": "./dist/ptolemy.js"
+    "index.js": "./dist/bundle.js"
   },
   "module": "src",
   "scripts": {
