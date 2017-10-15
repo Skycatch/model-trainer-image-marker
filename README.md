@@ -1,6 +1,6 @@
 # Library for implementing an image pixel marker for ML training
  
-![Screenshot]()
+![Screenshot](https://user-images.githubusercontent.com/4627728/31581209-4e34c030-b11a-11e7-9b12-3d8d19b5a57e.png)
 
 This library is framework agnostic so it can be used with React, Angular, Vue, or whatever other frameworks you so choose.
 
@@ -16,28 +16,83 @@ The css if applicable will be located in the `dist` folder of the node_module
 
 ## Interface
 
-Pass in an in memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](Image API)
+Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](Image API)
 
 URL can either be a http image url, or created from an in memory file with `window.URL.createObjectURL`
 
 
-
 ```javascript
 const ModelTrainerImageMarker = require('@skycatch/model-trainer-image-marker');
+const url = "https://user-images.githubusercontent.com/4627728/31581209-4e34c030-b11a-11e7-9b12-3d8d19b5a57e.png";
 const MarkerSystem = new ModelTrainerImageMarker('imageId');
 const img = new Image();
 img.onload = () => {
     MarkerSystem.boot(img, 'PoI-1', '#system', null, null, {
-      onReady: onReady.bind(this),
-      onMark: onMarked.bind(this),
-      onMarkClick: onMarkerClicked.bind(this),
-      onMarkDelete: onMarkDelete.bind(this),
-      onZoomReset: onZoomReset.bind(this),
-      onZoomToCP: onZoomToCP.bind(this)
+      onReady: myOnReady.bind(this),
+      onMark: myOnMarked.bind(this),
+      onMarkClick: myOnMarkerClicked.bind(this),
+      onMarkDelete: myOnMarkDelete.bind(this),
+      onZoomReset: myOnZoomReset.bind(this),
+      onZoomToCP: myOnZoomToCP.bind(this)
     });
 });
 img.src = url;
 ```
+
+
+## API 
+
+**new ModelTrainerImageMarker(imageId)**
+
+* `imageId` - <String>: UID of image
+
+**MarkerSystem.configure(options)** - <JSON>: Configuration optinos
+
+* `options`
+```javascript
+ {
+      'targetIcon': '#svg-xlink:href'
+ }
+```
+
+
+**MarkerSystem.boot(img, poi-Id, DOM-Id, alreadyMarked, currentMark, events)**
+
+* `img` - <Image()>: In-memory Image object
+* `poi-Id` - <String>: UID of Point of Interest PoI)
+* `DOM-Id` - <String>: DOM Element UID
+* `alreadyMarked` - <Array[<JSON>]>: Array of points of interest already marked in this image
+```javascript
+ [{
+      'cpId': 'PoI-1',
+      'x': 2500,
+      'y': 1000
+ }]
+```
+* `currentMark` - <JSON>: Access to live marking session
+```javascript
+ {
+      'cpId': 'PoI-1',
+      'x': 2500,
+      'y': 1000
+ }
+```
+- `events` - <JSON>: Event Listener Handles
+  - onReady
+  - onMark
+  - onMarkClick
+  - onMarkDelete
+  - onZoomReset
+  - onZoomToCP
+
+## Interact
+
+**MarkerSystem.resetZoom(duration)** - zooms back to the original centered - non-zoomed state
+
+**MarkerSystem.findCP(duration)** - focus + zooms to the marked PoI id marked
+
+**MarkerSystem.clearMarker()** - Removes the mark from the image
+
 
 
 ## What's in the box?
