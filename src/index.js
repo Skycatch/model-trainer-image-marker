@@ -9,11 +9,7 @@ require('./assets/svgs');
 
 const ModelTrainerImageMarker = require('./lib');
 
-
 if (module.hot) {
-  if (process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development') {
-    window.ModelTrainerImageMarker = ModelTrainerImageMarker;
-  }
   module.hot.accept();
 }
 

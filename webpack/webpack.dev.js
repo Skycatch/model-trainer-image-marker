@@ -64,7 +64,7 @@ module.exports = {
 
   output: {
     library: PackageJSON.name,
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'window',
     path: Path.resolve(__dirname, '../dist'),
     filename: 'bundle.js'
   },
@@ -101,7 +101,6 @@ module.exports = {
   stats: {
     colors: true,
     reasons: true
-
   },
 
   target: 'web'

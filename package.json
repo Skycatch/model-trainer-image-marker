@@ -1,9 +1,9 @@
 {
   "name": "@skycatch/model-trainer-image-marker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Reusuable module for easy visual machine learning context training",
   "main": "index.js",
-  "webpack": "./dist/bundle.js",
+  "webpack": "index.js",
   "browser": {
     "index.js": "./dist/bundle.js"
   },

@@ -6,7 +6,8 @@ const d3Target = '#system';
 /* I bound it to window because it would be otherwise unaccessable */
 /* with the way webpack serves the sandbox files                   */
 /*******************************************************************/
-const ModelTrainerImageMarker = window.ModelTrainerImageMarker;
+
+const ModelTrainerImageMarker = window['@skycatch/model-trainer-image-marker'];
 
 const internals = {};
 
@@ -43,6 +44,8 @@ fetch(imageRequest)
   img.src = url;
 });
 
+/// Application Events
+
 const onReady = (data) => {
   // Not Needed
   console.log('onReady: ', data);
@@ -72,6 +75,9 @@ const onZoomToCP = (data) => {
   console.log('onZoomToCP: ', data);
 }
 
+
+/// Application Modifiers
+
 const resetZoom = () => {
 
   if (internals.CanvasSystem) { internals.CanvasSystem.resetZoom(750); }
@@ -86,6 +92,11 @@ const clearMarker = () => {
 
   if (internals.CanvasSystem) { internals.CanvasSystem.clearMarker(); }
 };
+
+const redrawIcon = () => {
+
+  if (internals.CanvasSystem) { internals.CanvasSystem.reDrawMarker(); }
+}
 
 window.onresize = function(event) {
 

@@ -93,6 +93,8 @@ img.src = url;
 
 **MarkerSystem.clearMarker()** - Removes the mark from the image
 
+**MarkerSystem.reDrawMarker()** - Redraws the marker (incase configuration changes have occured)
+
 
 
 ## What's in the box?

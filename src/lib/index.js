@@ -143,6 +143,48 @@ class ModelTrainerImageMarker {
     }
   }
 
+  reDrawMarker() {
+
+    if (!this.CanvasArea) {
+      return;
+    }
+
+    this.CanvasArea.selectAll('use.control-point').remove();
+    this.CanvasArea.selectAll('circle.control-point').remove();
+    this.CanvasArea.selectAll('circle.shadow').remove();
+    const z = d3.zoomTransform(this.cartesianSystem.node()).k;
+    if (this.pin.pixelLocation[0] > 0 && this.pin.pixelLocation[1] > 0) {
+      const x = this.pin.pixelLocation[0];
+      const y = this.pin.pixelLocation[1];
+      if (this.targetIcon) {
+        this.mark = this.CanvasArea.append('use')
+          .attr('id', this.cpId)
+          .attr('xlink:href', this.targetIcon)
+          .attr('class', 'control-point')
+          .attr('width', kMarkSize / z)
+          .attr('height', kMarkSize / z)
+          .attr('x', x - (kMarkSize / z / 2) )
+          .attr('y', y - (kMarkSize / z / 2));
+      }
+      else {
+        this.mark = this.CanvasArea.append('circle')
+          .attr('id', this.cpId)
+          .attr('class', 'control-point')
+          .attr('dr', kMarkShadowSize)
+          .attr('r', kMarkShadowSize / z)
+          .attr('cx', x )
+          .attr('cy', y );
+      }
+
+      this.CanvasArea.append('circle')
+        .attr('class', 'shadow')
+        .attr('dr', kMarkShadowSize)
+        .attr('r', kMarkShadowSize / z)
+        .attr('cx', x )
+        .attr('cy', y );
+    }
+  }
+
   // Marks a pixel location on the system w.r.t. transformation and scale
   drawMarker(x, y) {
 
@@ -192,7 +234,9 @@ class ModelTrainerImageMarker {
         .attr('r', kMarkShadowSize / z)
         .attr('cx', x )
         .attr('cy', y );
+
       this.events.onMark ? this.events.onMark({ photoId: this.imgId, cpId: this.cpId, x, y }) : this.onMark({ photoId: this.imgId, cpId: this.cpId, x, y });
+
     }
   }
 
