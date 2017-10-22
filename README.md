@@ -44,11 +44,12 @@ img.src = url;
 
 **new ModelTrainerImageMarker(imageId)**
 
-* `imageId` - <String>: UID of image
+* `imageId` - _String_: UID of image
 
-**MarkerSystem.configure(options)** - <JSON>: Configuration optinos
+**MarkerSystem.configure(options)** - _JSON_: Configuration optinos
 
 * `options`
+
 ```javascript
  {
       'targetIcon': '#svg-xlink:href'
@@ -58,10 +59,11 @@ img.src = url;
 
 **MarkerSystem.boot(img, poi-Id, DOM-Id, alreadyMarked, currentMark, events)**
 
-* `img` - <Image()>: In-memory Image object
-* `poi-Id` - <String>: UID of Point of Interest PoI)
-* `DOM-Id` - <String>: DOM Element UID
-* `alreadyMarked` - <Array[<JSON>]>: Array of points of interest already marked in this image
+* `img` - _Image()_: In-memory Image object
+* `poi-Id` - _String_: UID of Point of Interest PoI)
+* `DOM-Id` - _String_: DOM Element UID
+* `alreadyMarked` - _Array[JSON]_: Array of points of interest already marked in this image
+
 ```javascript
  [{
       'cpId': 'PoI-1',
@@ -69,7 +71,8 @@ img.src = url;
       'y': 1000
  }]
 ```
-* `currentMark` - <JSON>: Access to live marking session
+* `currentMark` - _JSON_: Access to live marking session
+
 ```javascript
  {
       'cpId': 'PoI-1',
@@ -77,7 +80,7 @@ img.src = url;
       'y': 1000
  }
 ```
-- `events` - <JSON>: Event Listener Handles
+- `events` - _JSON_: Event Listener Handles
   - onReady
   - onMark
   - onMarkClick
@@ -87,9 +90,9 @@ img.src = url;
 
 ## Interact
 
-**MarkerSystem.resetZoom(duration)** - zooms back to the original centered - non-zoomed state
+**MarkerSystem.resetZoom(duration)** - _(ms)_ - zooms back to the original centered - non-zoomed state
 
-**MarkerSystem.findCP(duration)** - focus + zooms to the marked PoI id marked
+**MarkerSystem.findCP(duration)** - _(ms)_ - focus + zooms to the marked PoI id marked
 
 **MarkerSystem.clearMarker()** - Removes the mark from the image
 
