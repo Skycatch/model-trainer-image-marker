@@ -25,9 +25,9 @@ fetch(imageRequest)
 
     internals.CanvasSystem = new ModelTrainerImageMarker('imgId-1');
     // To specify the marker - pass reference to xlink:href
-    // internals.CanvasSystem.configure({
-    //   targetIcon: '#target-red'
-    // })
+    internals.CanvasSystem.configure({
+      targetIcon: '#target-white'
+    })
     internals.CanvasSystem.boot(img, 'cpId-1', d3Target, null, null, {
       onReady: onReady.bind(this),
       onMark: onMarked.bind(this),

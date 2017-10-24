@@ -1,5 +1,8 @@
 # Changelog
 
+v1.0.2
+- moved d3 to modular libraries
+
 v1.0.1
 - fix webpack dev builds to not need expliticly set to window
 - added reDrawMarker method
