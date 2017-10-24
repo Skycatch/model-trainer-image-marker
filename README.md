@@ -1,6 +1,6 @@
 # Library for implementing an image pixel marker for ML training
  
-![Screenshot](https://user-images.githubusercontent.com/4627728/31581209-4e34c030-b11a-11e7-9b12-3d8d19b5a57e.png)
+![Screenshot](https://user-images.githubusercontent.com/4627728/31919244-e004a99c-b815-11e7-8547-1ce77bcbfc0e.png)
 
 This library is framework agnostic so it can be used with React, Angular, Vue, or whatever other frameworks you so choose.
 
@@ -23,7 +23,7 @@ URL can either be a http image url, or created from an in memory file with `wind
 
 ```javascript
 const ModelTrainerImageMarker = require('@skycatch/model-trainer-image-marker');
-const url = "https://user-images.githubusercontent.com/4627728/31581209-4e34c030-b11a-11e7-9b12-3d8d19b5a57e.png";
+const url = "https://user-images.githubusercontent.com/4627728/31919244-e004a99c-b815-11e7-8547-1ce77bcbfc0e.png";
 const MarkerSystem = new ModelTrainerImageMarker('imageId');
 const img = new Image();
 img.onload = () => {
