@@ -1,5 +1,8 @@
 # Changelog
 
+v1.1.2
+- ff css transition has different behavior - looks bad.  replace ff with separate animation effect
+
 v1.1.1
 - forgot to bundle build
 

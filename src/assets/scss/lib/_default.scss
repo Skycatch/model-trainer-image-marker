@@ -9,14 +9,15 @@ svg#system {
 
     use,
     circle {
-      fill: #ccc;
       transform-origin: center center;
     }
 
     use.control-point + circle.shadow,
     circle.control-point + circle.shadow {
+      fill: #ccc;
       opacity: 0;
       animation: svg-circle-throb 0.4s linear 1;
+      -moz-animation: svg-circle-fade 0.4s linear 1;
     }
     circle.control-point-static {
       fill: #ccc;
@@ -69,3 +70,13 @@ svg#system {
     opacity: 0;
   }
 }
+
+@keyframes svg-circle-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
