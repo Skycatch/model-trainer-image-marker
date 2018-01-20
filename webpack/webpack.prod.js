@@ -54,7 +54,7 @@ module.exports = {
 
   output: {
     library: PackageJSON.name,
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',
     path: Path.resolve(__dirname, '../dist'),
     filename: 'bundle.js'
   },

@@ -1,5 +1,9 @@
 # Changelog
 
+v1.1.4
+- UMD
+- github pages update
+
 v1.1.3
 - forgot to bundle
 
