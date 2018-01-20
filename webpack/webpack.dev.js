@@ -7,6 +7,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
 
+  // Create Sourcemaps for the bundle
   devtool: 'source-map',
 
   context: Path.resolve(__dirname, '../'),
@@ -15,14 +16,14 @@ module.exports = {
     contentBase: Path.resolve(__dirname, '../sandbox'),
     compress: true,
     port: 8080,
-    hotOnly: true,
+
+    // hotOnly: true,
+
     inline: true,
+    watchContentBase: true
     // If you have an application server
     // proxy: { '*': { target: 'http://localhost:8081' } }
   },
-
-  // Create Sourcemaps for the bundle
-  devtool: 'source-map',
 
   entry: [Path.resolve(__dirname, '../src/index.js')],
 
@@ -64,15 +65,15 @@ module.exports = {
 
   output: {
     library: PackageJSON.name,
-    libraryTarget: 'window',
-    path: Path.resolve(__dirname, '../dist'),
+    libraryTarget: 'umd',
+    path: Path.resolve(__dirname, '../sandbox'),
     filename: 'bundle.js'
   },
 
   plugins: [
     // Specify the resulting CSS filename
-    new Webpack.HotModuleReplacementPlugin(),
     new Webpack.NamedModulesPlugin(),
+    // new Webpack.HotModuleReplacementPlugin(),
     new Webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)

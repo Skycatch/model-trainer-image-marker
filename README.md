@@ -4,6 +4,8 @@
 
 This library is framework agnostic so it can be used with React, Angular, Vue, or whatever other frameworks you so choose.
 
+See **[Example](https://skycatch.github.io/model-trainer-image-marker/sandbox/index.html)**
+
 To use this library in your application import it as follows for the javascript
 
 ```javascript
