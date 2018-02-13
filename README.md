@@ -59,7 +59,7 @@ img.src = url;
 
 ```javascript
  {
-      'targetIcon': '#svg-xlink:href' // Optional
+      'targetIcon': '#svg-xlink:href', // Optional
       'scaleMin': <number>, // Optional
       'scaleMax': <number>, // Optional
       'scaleLocateZoom': <number>, // Optional
