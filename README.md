@@ -6,26 +6,31 @@ This library is framework agnostic so it can be used with React, Angular, Vue, o
 
 See **[Example](https://skycatch.github.io/model-trainer-image-marker/sandbox)**
 
-To use this library in your application import it as follows for the javascript
+To use this library in your application, import the UMD module class
 
 ```javascript
 const ModelTrainerImageMarker = reqire('@skycatch/model-trainer-image-marker');
 ```
 
-The css if applicable will be located in the `dist` folder of the node_module
+Or 
 
+```javascript
+import ModelTrainerImageMarker from '@skycatch/model-trainer-image-marker';
+```
+
+To use the bundled styles, they can be found in the  `dist` folder of the node_module
 
 
 ## Interface
 
 Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](API)
 
-URL can either be a http image url, or created from an in memory file with `window.URL.createObjectURL`
+URL can either be a http image url, or created from an in memory file with `window.URL.createObjectURL`.  Remember to delete the file from your 
 
 
 ```javascript
 const ModelTrainerImageMarker = require('@skycatch/model-trainer-image-marker');
-const url = "https://user-images.githubusercontent.com/4627728/31919244-e004a99c-b815-11e7-8547-1ce77bcbfc0e.png";
+const url = "http://cdn.guff.com/site_1/media/15000/14063/items/e0b646a74ca8055620294f11.jpg";
 const MarkerSystem = new ModelTrainerImageMarker('imageId');
 const img = new Image();
 img.onload = () => {
@@ -54,7 +59,12 @@ img.src = url;
 
 ```javascript
  {
-      'targetIcon': '#svg-xlink:href'
+      'targetIcon': '#svg-xlink:href' // Optional
+      'scaleMin': <number>, // Optional
+      'scaleMax': <number>, // Optional
+      'scaleLocateZoom': <number>, // Optional
+      'markerSize': <number>, // Optional
+      'markerShadowSize': <number> // Optional
  }
 ```
 

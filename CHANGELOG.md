@@ -1,5 +1,10 @@
 # Changelog
 
+v1.1.5
+- Expose overwrite options for kConfig values
+- Update README
+- Update Webpack dev for devServer goodies
+
 v1.1.4
 - UMD
 - github pages update

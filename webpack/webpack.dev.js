@@ -7,19 +7,32 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
 
+  cache: true,
   // Create Sourcemaps for the bundle
-  devtool: 'source-map',
 
   context: Path.resolve(__dirname, '../'),
 
+  // devtool: 'source-map', // less performant - most verbose
+  devtool: 'cheap-eval-source-map', // performant - traceable
+
   devServer: {
+    before: () => {
+
+      console.warn('\n[******** Beginning Webpack ********]');
+    },
+    bonjour: true,
     contentBase: Path.resolve(__dirname, '../sandbox'),
     compress: true,
-    port: 8080,
-
-    // hotOnly: true,
-
+    hotOnly: false,
+    hot: false, // hot module replacement. Depends on HotModuleReplacementPlugin
+    https: false, // true for self-signed, object for cert authority
     inline: true,
+    lazy: false, // the dev-server will only compile the bundle when it gets requested
+    noInfo: false, // only errors & warns on hot reload
+    open: false,
+    overlay: true,
+    port: 8080,
+    progress: true,
     watchContentBase: true
     // If you have an application server
     // proxy: { '*': { target: 'http://localhost:8081' } }

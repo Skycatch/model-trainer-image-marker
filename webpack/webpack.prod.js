@@ -12,6 +12,8 @@ module.exports = {
 
   context: Path.resolve(__dirname, '../'),
 
+  devtool: 'hidden-source-map',
+
   entry: [Path.resolve(__dirname, '../src/index.js')],
 
   module: {

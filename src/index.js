@@ -3,11 +3,10 @@
 /* This must stay here for HMR support! */
 /****************************************/
 
-require('./assets/scss');
-require('./assets/svgs');
-// require('./assets/images') // Not Needed
+import scss from './assets/scss';
+import svgs from './assets/svgs';
 
-const ModelTrainerImageMarker = require('./lib');
+import ModelTrainerImageMarker from './lib';
 
 if (module.hot) {
   module.hot.accept();
