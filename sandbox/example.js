@@ -25,6 +25,7 @@ fetch(imageRequest)
 
     internals.CanvasSystem = new ModelTrainerImageMarker('imgId-1');
     // To specify the marker - pass reference to xlink:href
+    // Available Options: { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize }
     internals.CanvasSystem.configure({
       targetIcon: '#target-white'
     })
@@ -41,7 +42,7 @@ fetch(imageRequest)
     console.log(err);
   }
 
-  img.src = url;
+  img.src = Math.random() > .5 ? url : 'https://media.giphy.com/media/l0IyayMlfXiWKTJCM/giphy.gif';
 });
 
 /// Application Events
