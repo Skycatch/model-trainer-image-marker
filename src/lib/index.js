@@ -19,9 +19,9 @@ const d3 = Object.assign({},
 
 const kScaleMin = .09;
 const kScaleMax = 20;
-const kScaleLocate = 2;
-const kMarkSize = 38;
-const kMarkShadowSize = 9;
+const kScaleLocateZoom = 2;
+const kMarkerSize = 38;
+const kMarkerShadowSize = 9;
 
 /**
  * @Class ModelTrainerImageMarker class used to provide pan, zoom, and mark capabilities
@@ -67,10 +67,21 @@ class ModelTrainerImageMarker {
 
   configure (options) {
 
+    /* Superset */
+    /*
+      { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize }
+    */
+
     options = options || {};
     if (options.targetIcon) {
       this.targetIcon = options.targetIcon;
     }
+
+    this.optionScaleMin = options.scaleMin ? options.scaleMin : kScaleMin;
+    this.optionScaleMax = options.scaleMax ? options.scaleMax : kScaleMax;
+    this.optionScaleLocateZoom = options.scaleLocateZoom ? options.scaleLocateZoom : kScaleLocateZoom;
+    this.optionMarkerSize = options.markerSize ? options.markerSize : kMarkerSize;
+    this.optionMarkerShadowSize = options.markerShadowSize ? options.markerShadowSize : kMarkerShadowSize;
   }
 
   // Zooms backwards to a hollistic perspective
@@ -79,13 +90,13 @@ class ModelTrainerImageMarker {
     if (!delay) {
       delay = 0;
     }
-    const scaledWidth = this.img.width * kScaleMin;
-    const scaledHeight = this.img.height * kScaleMin;
+    const scaledWidth = this.img.width * this.optionScaleMin;
+    const scaledHeight = this.img.height * this.optionScaleMin;
     const x = (this.width - scaledWidth) / 2;
     const y = (this.height - scaledHeight) / 2;
     this.cartesianSystem.transition()
       .duration(delay)
-      .call(this._zoomStrat().transform, d3.zoomIdentity.translate(x, y).scale(kScaleMin));
+      .call(this._zoomStrat().transform, d3.zoomIdentity.translate(x, y).scale(this.optionScaleMin));
     this.events.onZoomReset ? this.events.onZoomReset() : this.onZoomReset();
   }
 
@@ -104,14 +115,15 @@ class ModelTrainerImageMarker {
 
   // Marks a pixel location on the system w.r.t. transformation and scale, uneditable marker
   drawStatic (x, y, context) {
+
     // draw static object
     const z = d3.zoomTransform(this.cartesianSystem.node()).k;
     if (x > 0 && y > 0) {
       this.mark = this.CanvasArea.append('circle')
         .attr('id', context.cpId)
         .attr('class', 'control-point-static')
-        .attr('dr', kMarkShadowSize)
-        .attr('r', kMarkShadowSize / z)
+        .attr('dr', this.optionMarkerShadowSize)
+        .attr('r', this.optionMarkerShadowSize / z)
         .attr('cx', x )
         .attr('cy', y )
         .on('mouseover', (d) => {
@@ -161,25 +173,25 @@ class ModelTrainerImageMarker {
           .attr('id', this.cpId)
           .attr('xlink:href', this.targetIcon)
           .attr('class', 'control-point')
-          .attr('width', kMarkSize / z)
-          .attr('height', kMarkSize / z)
-          .attr('x', x - (kMarkSize / z / 2) )
-          .attr('y', y - (kMarkSize / z / 2));
+          .attr('width', this.optionMarkerSize / z)
+          .attr('height', this.optionMarkerSize / z)
+          .attr('x', x - (this.optionMarkerSize / z / 2) )
+          .attr('y', y - (this.optionMarkerSize / z / 2));
       }
       else {
         this.mark = this.CanvasArea.append('circle')
           .attr('id', this.cpId)
           .attr('class', 'control-point')
-          .attr('dr', kMarkShadowSize)
-          .attr('r', kMarkShadowSize / z)
+          .attr('dr', this.optionMarkerShadowSize)
+          .attr('r', this.optionMarkerShadowSize / z)
           .attr('cx', x )
           .attr('cy', y );
       }
 
       this.CanvasArea.append('circle')
         .attr('class', 'shadow')
-        .attr('dr', kMarkShadowSize)
-        .attr('r', kMarkShadowSize / z)
+        .attr('dr', this.optionMarkerShadowSize)
+        .attr('r', this.optionMarkerShadowSize / z)
         .attr('cx', x )
         .attr('cy', y );
     }
@@ -212,25 +224,25 @@ class ModelTrainerImageMarker {
           .attr('id', this.cpId)
           .attr('xlink:href', this.targetIcon)
           .attr('class', 'control-point')
-          .attr('width', kMarkSize / z)
-          .attr('height', kMarkSize / z)
-          .attr('x', x - (kMarkSize / z / 2) )
-          .attr('y', y - (kMarkSize / z / 2));
+          .attr('width', this.optionMarkerSize / z)
+          .attr('height', this.optionMarkerSize / z)
+          .attr('x', x - (this.optionMarkerSize / z / 2) )
+          .attr('y', y - (this.optionMarkerSize / z / 2));
       }
       else {
         this.mark = this.CanvasArea.append('circle')
           .attr('id', this.cpId)
           .attr('class', 'control-point')
-          .attr('dr', kMarkShadowSize)
-          .attr('r', kMarkShadowSize / z)
+          .attr('dr', this.optionMarkerShadowSize)
+          .attr('r', this.optionMarkerShadowSize / z)
           .attr('cx', x )
           .attr('cy', y );
       }
 
       this.CanvasArea.append('circle')
         .attr('class', 'shadow')
-        .attr('dr', kMarkShadowSize)
-        .attr('r', kMarkShadowSize / z)
+        .attr('dr', this.optionMarkerShadowSize)
+        .attr('r', this.optionMarkerShadowSize / z)
         .attr('cx', x )
         .attr('cy', y );
 
@@ -263,11 +275,11 @@ class ModelTrainerImageMarker {
     }
 
     if (this.pin && this.pin.pixelLocation && this.pin.pixelLocation.length === 2) {
-      const x = (this.width / 2) - this.pin.pixelLocation[0] * kScaleLocate;
-      const y = (this.height / 2) - this.pin.pixelLocation[1] * kScaleLocate;
+      const x = (this.width / 2) - this.pin.pixelLocation[0] * this.optionScaleLocateZoom;
+      const y = (this.height / 2) - this.pin.pixelLocation[1] * this.optionScaleLocateZoom;
       this.cartesianSystem.transition()
         .duration(delay)
-        .call(this._zoomStrat().transform, d3.zoomIdentity.translate(x, y).scale(kScaleLocate));
+        .call(this._zoomStrat().transform, d3.zoomIdentity.translate(x, y).scale(this.optionScaleLocateZoom));
     }
     else {
       this.resetZoom(750);
@@ -303,9 +315,10 @@ class ModelTrainerImageMarker {
   _zoomStrat () {
 
     return d3.zoom()
-      .scaleExtent([kScaleMin, kScaleMax])
+      .scaleExtent([this.optionScaleMin, this.optionScaleMax])
       .on('zoom', () => {
 
+        const markerSize = this.optionMarkerSize;
         this.CanvasArea.attr('transform', currentEvent.transform);
         this.pX.call(this.xAxis.scale(currentEvent.transform.rescaleX(this.xScale)));
         this.pY.call(this.yAxis.scale(currentEvent.transform.rescaleY(this.yScale)));
@@ -313,19 +326,21 @@ class ModelTrainerImageMarker {
           // Resize the marker icon
           this.CanvasArea.selectAll('use.control-point')
             .each(function(d) {
+
               const cp = d3.select(this);
               const k = currentEvent.transform.k;
-              const dWidth = (parseFloat(cp.attr('width')) - kMarkSize / k) / 2;
-              const dHeight = (parseFloat(cp.attr('height')) - kMarkSize / k) / 2;
+              const dWidth = (parseFloat(cp.attr('width')) - markerSize / k) / 2;
+              const dHeight = (parseFloat(cp.attr('height')) - markerSize / k) / 2;
               const x = parseFloat(cp.attr('x')) + dWidth;
               const y = parseFloat(cp.attr('y')) + dHeight;
-              cp.attr('width', kMarkSize / k)
-              cp.attr('height', kMarkSize / k)
+              cp.attr('width', markerSize / k)
+              cp.attr('height', markerSize / k)
               cp.attr('x', x)
               cp.attr('y', y);
             });
           this.CanvasArea.selectAll('circle.control-point')
             .each(function(d) {
+
               const cp = d3.select(this);
               let z = currentEvent.transform.k;
               if (cp.attr('dr')) {
@@ -335,6 +350,7 @@ class ModelTrainerImageMarker {
             });
           this.CanvasArea.selectAll('circle.shadow')
             .each(function(d) {
+
               const cp = d3.select(this);
               let z = currentEvent.transform.k;
               if (cp.attr('dr')) {
@@ -344,6 +360,7 @@ class ModelTrainerImageMarker {
             });
           this.CanvasArea.selectAll('circle.control-point-static')
             .each(function(d) {
+
               const cp = d3.select(this);
               let z = currentEvent.transform.k;
               if (cp.attr('dr')) {
@@ -415,6 +432,7 @@ class ModelTrainerImageMarker {
     this.events.onReady ? this.events.onReady(this.cpId) : this.onReady(this.cpId);
     if (this.objects && this.objects.length) {
       this.objects.forEach((object) => {
+
         this.drawStatic(object.xPos, object.yPos, object);
       });
     }
@@ -429,26 +447,32 @@ class ModelTrainerImageMarker {
   }
 
   onReady (data) {
+
     // noop... set by application
   }
 
   onMark (data) {
+
     // noop... set by application
   }
 
   onMarkClick (data) {
+
     // noop... set by application
   }
 
   onMarkDelete (data) {
+
     // noop... set by application
   }
 
   onZoomReset (data) {
+
     // noop... set by application
   }
 
   onZoomToCP (data) {
+
     // noop... set by application
   }
 
