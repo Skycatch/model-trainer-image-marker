@@ -182,8 +182,8 @@ class ModelTrainerImageMarker {
         this.mark = this.CanvasArea.append('circle')
           .attr('id', this.cpId)
           .attr('class', 'control-point')
-          .attr('dr', this.optionMarkerShadowSize)
-          .attr('r', this.optionMarkerShadowSize / z)
+          .attr('dr', this.optionMarkerShadowSize + 6)
+          .attr('r', this.optionMarkerShadowSize / z + 6)
           .attr('cx', x )
           .attr('cy', y );
       }
