@@ -42,7 +42,7 @@ fetch(imageRequest)
     console.log(err);
   }
 
-  img.src = Math.random() > .5 ? url : 'https://media.giphy.com/media/l0IyayMlfXiWKTJCM/giphy.gif';
+  img.src = Math.random() > .1 ? url : 'https://media.giphy.com/media/l0IyayMlfXiWKTJCM/giphy.gif';
 });
 
 /// Application Events

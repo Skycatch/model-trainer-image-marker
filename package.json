@@ -1,6 +1,6 @@
 {
   "name": "@skycatch/model-trainer-image-marker",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Reusuable module for easy visual machine learning context training",
   "main": "index.js",
   "webpack": "index.js",
@@ -62,11 +62,11 @@
   ],
   "dependencies": {
     "d3-axis": "^1.0.8",
-    "d3-scale": "^1.0.6",
-    "d3-selection": "^1.1.0",
+    "d3-scale": "^2.0.0",
+    "d3-selection": "^1.3.0",
     "d3-transform": "^1.0.5",
-    "d3-transition": "^1.1.0",
-    "d3-zoom": "^1.6.0",
-    "normalize.css": "^7.0.0"
+    "d3-transition": "^1.1.1",
+    "d3-zoom": "^1.7.1",
+    "normalize.css": "^8.0.0"
   }
 }

@@ -1,5 +1,8 @@
 # Changelog
 
+v1.1.6
+- Fix css away from using transform: scale due to weird behavior
+
 v1.1.5
 - Expose overwrite options for kConfig values
 - Update README
