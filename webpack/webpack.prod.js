@@ -5,8 +5,7 @@ const Path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
-require('es6-promise').polyfill();
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 
@@ -16,8 +15,10 @@ module.exports = {
 
   entry: [Path.resolve(__dirname, '../src/index.js')],
 
+  mode: 'production',
+
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -33,15 +34,21 @@ module.exports = {
         loaders: ['json-loader']
       },
       {
-        test: /\.scss$/,
-        loader:  ExtractTextPlugin.extract({
-          fallback:'style-loader',
-          use:['css-loader','sass-loader', 'autoprefixer-loader?browsers=last 4 versions']
-        })
+        test: /\.s[ac]ss$/,
+        use: [
+          { loader: 'style-loader'},
+          { loader: 'css-loader'},
+          { loader: 'postcss-loader'},
+          { loader: 'sass-loader'}
+        ]
       },
       {
         test: /\.css$/,
-        loader:  'style-loader!css-loader!autoprefixer-loader?browsers=last 4 versions'
+        use: [
+          { loader: 'style-loader'},
+          { loader: 'css-loader'},
+          { loader: 'postcss-loader'}
+        ]
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
@@ -54,6 +61,19 @@ module.exports = {
     fs: 'empty'
   },
 
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false,
+          },
+        },
+      }),
+    ],
+  },
+
   output: {
     library: PackageJSON.name,
     libraryTarget: 'umd',
@@ -64,8 +84,6 @@ module.exports = {
   plugins: [
     // Specify the resulting CSS filename
     new ExtractTextPlugin('bundle.css'),
-    // Breaks the require references in src
-    new Webpack.optimize.UglifyJsPlugin({minimize: true}),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessorOptions: { discardComments: { removeAll: true } }
