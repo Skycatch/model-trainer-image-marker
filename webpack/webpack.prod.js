@@ -68,10 +68,10 @@ module.exports = {
         uglifyOptions: {
           compress: {
             inline: false,
-          },
-        },
-      }),
-    ],
+          }
+        }
+      })
+    ]
   },
 
   output: {
