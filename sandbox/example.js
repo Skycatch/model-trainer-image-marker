@@ -23,13 +23,13 @@ fetch(imageRequest)
   const img = new Image();
   img.onload = () => {
 
-    internals.CanvasSystem = new ModelTrainerImageMarker('imgId-1');
+    internals.CanvasSystem = new ModelTrainerImageMarker('cpId-1');
     // To specify the marker - pass reference to xlink:href
     // Available Options: { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize }
     internals.CanvasSystem.configure({
       targetIcon: '#target-white'
     })
-    internals.CanvasSystem.boot(img, 'cpId-1', d3Target, null, null, {
+    internals.CanvasSystem.boot(img, 'imgId-1', d3Target, null, null, {
       onReady: onReady.bind(this),
       onMark: onMarked.bind(this),
       onMarkClick: onMarkerClicked.bind(this),

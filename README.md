@@ -31,10 +31,10 @@ URL can either be a http image url, or created from an in memory file with `wind
 ```javascript
 const ModelTrainerImageMarker = require('@skycatch/model-trainer-image-marker');
 const url = "http://cdn.guff.com/site_1/media/15000/14063/items/e0b646a74ca8055620294f11.jpg";
-const MarkerSystem = new ModelTrainerImageMarker('imageId');
+const MarkerSystem = new ModelTrainerImageMarker('PoI-1');
 const img = new Image();
 img.onload = () => {
-    MarkerSystem.boot(img, 'PoI-1', '#system', null, null, {
+    MarkerSystem.boot(img, 'imageId', '#system', null, null, {
       onReady: myOnReady.bind(this),
       onMark: myOnMarked.bind(this),
       onMarkClick: myOnMarkerClicked.bind(this),
@@ -49,9 +49,9 @@ img.src = url;
 
 ## API 
 
-**new ModelTrainerImageMarker(imageId)**
+**new ModelTrainerImageMarker(poiId)**
 
-* `imageId` - _String_: UID of image
+* `poiId` - _String_: UID of object of interest
 
 **MarkerSystem.configure(options)** - _JSON_: Configuration optinos
 
@@ -69,10 +69,10 @@ img.src = url;
 ```
 
 
-**MarkerSystem.boot(img, poi-Id, DOM-Id, alreadyMarked, currentMark, events)**
+**MarkerSystem.boot(img, image-Id, DOM-Id, alreadyMarked, currentMark, events)**
 
 * `img` - _Image()_: In-memory Image object
-* `poi-Id` - _String_: UID of Point of Interest PoI)
+* `image-Id` - _String_: UID of image
 * `DOM-Id` - _String_: DOM Element UID
 * `alreadyMarked` - _Array[JSON]_: Array of points of interest already marked in this image
 
