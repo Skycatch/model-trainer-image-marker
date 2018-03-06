@@ -20,7 +20,6 @@ module.exports = {
 
       console.warn('\n[******** Beginning Webpack ********]');
     },
-    bonjour: true,
     contentBase: Path.resolve(__dirname, '../sandbox'),
     compress: true,
     hotOnly: false,
@@ -31,7 +30,6 @@ module.exports = {
     noInfo: false, // only errors & warns on hot reload
     open: false,
     overlay: true,
-    port: 8080,
     progress: true,
     watchContentBase: true
     // If you have an application server
@@ -40,8 +38,10 @@ module.exports = {
 
   entry: [Path.resolve(__dirname, '../src/index.js')],
 
+  mode: 'development',
+
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -57,12 +57,21 @@ module.exports = {
         loaders: ['json-loader']
       },
       {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 4 version"]}!sass-loader?sourceMap&sourceComments'
+        test: /\.s[ac]ss$/,
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } }
+        ]
       },
       {
         test: /\.css$/,
-        loader:  'style-loader!css-loader!autoprefixer-loader?{browsers:["last 4 version"]}'
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } }
+        ]
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
@@ -74,7 +83,6 @@ module.exports = {
   node: {
     fs: 'empty'
   },
-
 
   output: {
     library: PackageJSON.name,
@@ -94,14 +102,14 @@ module.exports = {
     }),
     // Breaks the require references in src
     // new Webpack.optimize.UglifyJsPlugin({minimize: true}),
-    new StyleLintPlugin({
-      configFile: '.stylelintrc',
-      context: '',
-      files: '**/*.scss',
-      syntax: 'scss',
-      failOnError: false,
-      quiet: false
-    })
+    // new StyleLintPlugin({
+    //   configFile: '.stylelintrc',
+    //   context: '',
+    //   files: '**/*.scss',
+    //   syntax: 'scss',
+    //   failOnError: false,
+    //   quiet: false
+    // })
   ],
 
   resolve: {

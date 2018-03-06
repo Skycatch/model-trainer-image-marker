@@ -485,4 +485,4 @@ class ModelTrainerImageMarker {
   }
 }
 
-module.exports = ModelTrainerImageMarker;
+export default ModelTrainerImageMarker;
