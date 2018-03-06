@@ -1,6 +1,6 @@
 # Library for implementing an image pixel marker for ML training
  
-![Screenshot](https://user-images.githubusercontent.com/4627728/31919244-e004a99c-b815-11e7-8547-1ce77bcbfc0e.png)
+![Screenshot](https://user-images.githubusercontent.com/4627728/37057857-93ed6242-213d-11e8-8e04-ee61036a4e02.png)
 
 This library is framework agnostic so it can be used with React, Angular, Vue, or whatever other frameworks you so choose.
 
