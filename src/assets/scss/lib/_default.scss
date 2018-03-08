@@ -1,4 +1,4 @@
-svg#system {
+svg.mtim_system {
   width: 100%;
   display: block;
   margin: 0.5em auto;
@@ -11,13 +11,20 @@ svg#system {
       transform-origin: center center;
     }
 
-    use.control-point + circle.shadow,
-    circle.control-point + circle.shadow {
+    use.control-point + circle.shadow {
       fill: #ccc;
       opacity: 0;
       transform-origin: center;
       animation: svg-circle-fade-gradual 0.4s linear 1;
     }
+
+    circle.control-point + circle.shadow {
+      fill: #ccc;
+      opacity: 1;
+      transform-origin: center;
+      animation: svg-circle-fade 0.4s linear 1;
+    }
+
     circle.control-point-static {
       fill: #ccc;
       cursor: pointer;

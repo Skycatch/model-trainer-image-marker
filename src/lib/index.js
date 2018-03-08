@@ -61,6 +61,7 @@ class ModelTrainerImageMarker {
     this.target = target;
     this.imgId = imgId;
     this.cartesianSystem = d3.select(`svg${this.target}`);
+    this.cartesianSystem.attr('class', 'mtim_system');
 
     this._init();
   }
@@ -375,6 +376,7 @@ class ModelTrainerImageMarker {
   // Initialize System
   _init () {
 
+    this.configure();
     // X Scaling Behavior
     this.xScale = d3.scaleLinear()
       .domain([-1,  this.img.width + 1])
