@@ -6,6 +6,9 @@ body {
 body .relative {
   position: relative;
 }
+body .inline {
+  display: inline-block;
+}
 body .float-right {
   position: absolute;
   top: 20px;
