@@ -90,15 +90,15 @@ class ModelTrainerImageMarker {
       }
     })
     if (options.targetIcon) {
-      this.targetIcon = this.targetIcon ? this.targetIcon : options.targetIcon;
+      this.targetIcon = options.targetIcon;
     }
 
-    this.optionScaleMin = this.optionScaleMin ? this.optionScaleMin : (options.scaleMin ? options.scaleMin : kScaleMin);
-    this.optionScaleMax = this.optionScaleMax ? this.optionScaleMax : (options.scaleMax ? options.scaleMax : kScaleMax);
-    this.optionScaleLocateZoom = this.optionScaleLocateZoom ? this.optionScaleLocateZoom : (options.scaleLocateZoom ? options.scaleLocateZoom : kScaleLocateZoom);
-    this.optionMarkerSize = this.optionMarkerSize ? this.optionMarkerSize : (options.markerSize ? options.markerSize : kMarkerSize);
-    this.optionMarkerShadowSize = this.optionMarkerShadowSize ? this.optionMarkerShadowSize : (options.markerShadowSize ? options.markerShadowSize : kMarkerShadowSize);
-    this.optionReadOnly = this.optionReadOnly ? this.optionReadOnly : (options.readOnly ? options.readOnly : kReadOnlyMode);
+    this.optionScaleMin = options.scaleMin ? options.scaleMin : (this.optionScaleMin ? this.optionScaleMin : kScaleMin);
+    this.optionScaleMax = options.scaleMax ? options.scaleMax : (this.optionScaleMax ? this.optionScaleMax : kScaleMax);
+    this.optionScaleLocateZoom = options.scaleLocateZoom ? options.scaleLocateZoom : (this.optionScaleLocateZoom ? this.optionScaleLocateZoom : kScaleLocateZoom);
+    this.optionMarkerSize = options.markerSize ? options.markerSize : (this.optionMarkerSize ? this.optionMarkerSize : kMarkerSize);
+    this.optionMarkerShadowSize =  options.markerShadowSize ? options.markerShadowSize : (this.optionMarkerShadowSize ? this.optionMarkerShadowSize : kMarkerShadowSize);
+    this.optionReadOnly = options.readOnly ? options.readOnly : (this.optionReadOnly ? this.optionReadOnly : kReadOnlyMode);
   }
 
   // Zooms backwards to a hollistic perspective

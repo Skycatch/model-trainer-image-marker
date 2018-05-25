@@ -68,6 +68,13 @@ const initialize = (el, url) => {
       onZoomReset: onZoomReset.bind(this),
       onZoomToMark: onZoomToMark.bind(this)
     });
+    setInterval(() => {
+      const color = '#target-'+internals.iconColors[Math.floor(Math.random() * internals.iconColors.length)];
+      internals.CanvasSystem[el].configure({
+        targetIcon: color
+      });
+      internals.CanvasSystem[el].reDrawMarker();
+    }, 2000)
   };
   img.onerror = (err) => {
     console.log(err);

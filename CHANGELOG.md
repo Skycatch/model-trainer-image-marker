@@ -1,5 +1,8 @@
 ## Changelog
 
+# v2.0.2
+- allow options to be overwritten (icon)
+
 # v2.0.1
 - remove tooltip on destroy if there is an artifact
 
