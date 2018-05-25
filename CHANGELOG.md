@@ -1,5 +1,8 @@
 ## Changelog
 
+# v2.0.1
+- remove tooltip on destroy if there is an artifact
+
 # v2.0.0
 - breaking changes
 - consistant naming ![#3](https://github.com/Skycatch/model-trainer-image-marker/issues/3)

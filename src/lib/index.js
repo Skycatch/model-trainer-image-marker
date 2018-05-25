@@ -126,6 +126,7 @@ class ModelTrainerImageMarker {
     this.cartesianSystem.selectAll('*').remove();
     this.cartesianSystem = null;
     this.img = '';
+    d3.selectAll(`.d3-tooltip`).filter(`#${this.target.replace("#","")}-mtim`).remove();
     return null;
   }
 
