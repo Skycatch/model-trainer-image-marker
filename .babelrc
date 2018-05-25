@@ -1,6 +1,12 @@
 {
-  "presets": ["babel-preset-env"],
+  "presets": [
+    ["@babel/preset-env", {
+      "useBuiltIns": "usage"
+    }]
+  ],
   "plugins": [
+    "transform-class-properties",
+    "syntax-async-functions",
     "add-module-exports"
   ]
 }
