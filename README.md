@@ -31,16 +31,20 @@ URL can either be a http image url, or created from an in memory file with `wind
 ```javascript
 const ModelTrainerImageMarker = require('@skycatch/model-trainer-image-marker');
 const url = "http://cdn.guff.com/site_1/media/15000/14063/items/e0b646a74ca8055620294f11.jpg";
-const MarkerSystem = new ModelTrainerImageMarker('PoI-1');
+const MarkerSystem = new ModelTrainerImageMarker('id-1');
 const img = new Image();
 img.onload = () => {
-    MarkerSystem.boot(img, 'imageId', '#system', null, null, {
+    MarkerSystem.boot(img, 'imageId', '#system', [{
+        x: 200,
+        y: 600,
+        id: 'other-marker'
+      }], null, {
       onReady: myOnReady.bind(this),
       onMark: myOnMarked.bind(this),
       onMarkClick: myOnMarkerClicked.bind(this),
       onMarkDelete: myOnMarkDelete.bind(this),
       onZoomReset: myOnZoomReset.bind(this),
-      onZoomToCP: myOnZoomToCP.bind(this)
+      onZoomToMark: myOnZoomToMark.bind(this)
     });
 });
 img.src = url;
@@ -64,7 +68,8 @@ img.src = url;
       'scaleMax': <number>, // Optional
       'scaleLocateZoom': <number>, // Optional
       'markerSize': <number>, // Optional
-      'markerShadowSize': <number> // Optional
+      'markerShadowSize': <number>, // Optional
+      'readOnly': <boolean>
  }
 ```
 
@@ -78,7 +83,7 @@ img.src = url;
 
 ```javascript
  [{
-      'cpId': 'PoI-1',
+      'id': 'id-1',
       'x': 2500,
       'y': 1000
  }]
@@ -87,7 +92,7 @@ img.src = url;
 
 ```javascript
  {
-      'cpId': 'PoI-1',
+      'id': 'id-1',
       'x': 2500,
       'y': 1000
  }
@@ -98,13 +103,13 @@ img.src = url;
   - onMarkClick
   - onMarkDelete
   - onZoomReset
-  - onZoomToCP
+  - onZoomToMark
 
 ## Interact
 
 **MarkerSystem.resetZoom(duration)** - _(ms)_ - zooms back to the original centered - non-zoomed state
 
-**MarkerSystem.findCP(duration)** - _(ms)_ - focus + zooms to the marked PoI id marked
+**MarkerSystem.findCP(duration)** - _(ms)_ - focus + zooms to the marked id id marked
 
 **MarkerSystem.clearMarker()** - Removes the mark from the image
 

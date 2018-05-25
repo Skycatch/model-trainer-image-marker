@@ -30,3 +30,21 @@ body .float-right ul li {
   color: black;
   font-weight: bold;
 }
+
+body .d3-tooltip {
+  position: absolute;
+  /*display: none;*/
+  min-width: 30px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #6F257F;
+  padding: 7px 14px;
+  text-align: center;
+}
+
+.no-margin {
+  margin: 0!important;
+}
+.bold {
+  font-weight: 700;
+}

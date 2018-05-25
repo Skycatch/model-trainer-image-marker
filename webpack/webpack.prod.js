@@ -5,13 +5,12 @@ const Path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
+module.exports = [{
 
   context: Path.resolve(__dirname, '../'),
-
-  devtool: 'hidden-source-map',
 
   entry: [Path.resolve(__dirname, '../src/index.js')],
 
@@ -30,48 +29,34 @@ module.exports = {
         }]
       },
       {
-        test: /\.json$/,
-        loaders: ['json-loader']
-      },
-      {
         test: /\.s[ac]ss$/,
-        use: [
-          { loader: 'style-loader'},
-          { loader: 'css-loader'},
-          { loader: 'postcss-loader'},
-          { loader: 'sass-loader'}
-        ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
       },
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader'},
-          { loader: 'css-loader'},
-          { loader: 'postcss-loader'}
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' }
         ]
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
         loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        loader: 'html-loader'
       }
     ]
   },
 
   node: {
     fs: 'empty'
-  },
-
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: true,
-        uglifyOptions: {
-          compress: {
-            inline: false,
-          }
-        }
-      })
-    ]
   },
 
   output: {
@@ -81,12 +66,44 @@ module.exports = {
     filename: 'bundle.js'
   },
 
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            inline: false
+          }
+        }
+      })
+    ],
+    runtimeChunk: false,
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  },
+
   plugins: [
     // Specify the resulting CSS filename
     new ExtractTextPlugin('bundle.css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessorOptions: { discardComments: { removeAll: true } }
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'webpack_report.html',
+      openAnalyzer: false,
+      generateStatsFile: true,
+      statsFilename: 'webpack_stats.json',
     })
   ],
 
@@ -99,9 +116,17 @@ module.exports = {
   },
 
   stats: {
-    colors: true,
-    reasons: true
+    colors: false,
+    hash: true,
+    timings: true,
+    assets: true,
+    chunks: true,
+    chunkModules: true,
+    modules: true,
+    children: true,
   },
 
+
   target: 'web'
-};
+
+}];
