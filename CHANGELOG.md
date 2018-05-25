@@ -1,5 +1,12 @@
 ## Changelog
 
+# v2.0.0
+- breaking changes
+- consistant naming ![#3](https://github.com/Skycatch/model-trainer-image-marker/issues/3)
+- added option for readOnly mode
+- webpack4
+- tooltip issues fixed
+
 # v1.2.2
 - fix bug with configure not getting called results in error
 - added multiple instances to example for illustation

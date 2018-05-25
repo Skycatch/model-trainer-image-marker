@@ -44,20 +44,29 @@ const initialize = (el, url) => {
 
   img.onload = () => {
 
-    internals.CanvasSystem[el] = new ModelTrainerImageMarker('cpId-'+internals.guid());
+    internals.CanvasSystem[el] = new ModelTrainerImageMarker('markId-'+internals.guid());
     // To specify the marker - pass reference to xlink:href
     // Available Options: { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize }
     internals.CanvasSystem[el].configure({
-      targetIcon: '#target-'+internals.iconColors[Math.floor(Math.random() * internals.iconColors.length)]
+      targetIcon: '#target-'+internals.iconColors[Math.floor(Math.random() * internals.iconColors.length)],
+      readOnly: false
     });
 
-    internals.CanvasSystem[el].boot(img, 'imgId-'+internals.guid(), '#'+el, null, null, {
+    internals.CanvasSystem[el].boot(img, 'imgId-'+internals.guid(), '#'+el, [{
+      x: 50,
+      y: 50,
+      id: 'mark'
+    }, {
+      x: 250,
+      y: 250,
+      id: 'other-mark'
+    }], null, {
       onReady: onReady.bind(this),
       onMark: onMarked.bind(this),
       onMarkClick: onMarkerClicked.bind(this),
       onMarkDelete: onMarkDelete.bind(this),
       onZoomReset: onZoomReset.bind(this),
-      onZoomToCP: onZoomToCP.bind(this)
+      onZoomToMark: onZoomToMark.bind(this)
     });
   };
   img.onerror = (err) => {
@@ -76,12 +85,12 @@ const onReady = (data) => {
 
 const onMarked = (data) => {
 
-  console.log('onCPMarked: ', data);
+  console.log('onMarked: ', data);
 }
 
 const onMarkerClicked = (data) => {
 
-  console.log('onCPMarkerClicked: ', data);
+  console.log('onMarkerClicked: ', data);
 }
 
 const onMarkDelete = (data) => {
@@ -93,9 +102,9 @@ const onZoomReset = (data) => {
   // Not needed
 }
 
-const onZoomToCP = (data) => {
+const onZoomToMark = (data) => {
 
-  console.log('onZoomToCP: ', data);
+  console.log('onZoomToMark: ', data);
 }
 
 

@@ -8,12 +8,12 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 module.exports = {
 
   cache: true,
-  // Create Sourcemaps for the bundle
 
   context: Path.resolve(__dirname, '../'),
 
-  // devtool: 'source-map', // less performant - most verbose
-  devtool: 'cheap-eval-source-map', // performant - traceable
+  // Create Sourcemaps for the bundle
+  devtool: 'source-map', // less performant - most verbose
+  // devtool: 'cheap-eval-source-map', // performant - traceable
 
   devServer: {
     before: () => {
@@ -22,6 +22,7 @@ module.exports = {
     },
     contentBase: Path.resolve(__dirname, '../sandbox'),
     compress: true,
+    historyApiFallback: true,
     hotOnly: false,
     hot: false, // hot module replacement. Depends on HotModuleReplacementPlugin
     https: false, // true for self-signed, object for cert authority
@@ -53,10 +54,6 @@ module.exports = {
         }]
       },
       {
-        test: /\.json$/,
-        loaders: ['json-loader']
-      },
-      {
         test: /\.s[ac]ss$/,
         use: [
           { loader: 'style-loader', options: { sourceMap: true } },
@@ -76,6 +73,11 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
         loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        loader: 'html-loader'
       }
     ]
   },
@@ -85,16 +87,14 @@ module.exports = {
   },
 
   output: {
+    filename: 'bundle.js',
     library: PackageJSON.name,
     libraryTarget: 'umd',
-    path: Path.resolve(__dirname, '../sandbox'),
-    filename: 'bundle.js'
+    path: Path.resolve(__dirname, '../dist')
   },
 
   plugins: [
-    // Specify the resulting CSS filename
     new Webpack.NamedModulesPlugin(),
-    // new Webpack.HotModuleReplacementPlugin(),
     new Webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -102,14 +102,14 @@ module.exports = {
     }),
     // Breaks the require references in src
     // new Webpack.optimize.UglifyJsPlugin({minimize: true}),
-    // new StyleLintPlugin({
-    //   configFile: '.stylelintrc',
-    //   context: '',
-    //   files: '**/*.scss',
-    //   syntax: 'scss',
-    //   failOnError: false,
-    //   quiet: false
-    // })
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
+      context: '',
+      files: '**/*.scss',
+      syntax: 'scss',
+      failOnError: false,
+      quiet: false
+    })
   ],
 
   resolve: {
@@ -123,6 +123,7 @@ module.exports = {
   stats: {
     colors: true,
     reasons: true
+
   },
 
   target: 'web'
