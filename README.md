@@ -57,7 +57,7 @@ img.src = url;
 
 * `poiId` - _String_: UID of object of interest
 
-**MarkerSystem.configure(options)** - _JSON_: Configuration optinos
+**MarkerSystem.configure(options)** - _JSON_: Configuration options
 
 * `options`
 
@@ -69,7 +69,9 @@ img.src = url;
       'scaleLocateZoom': <number>, // Optional
       'markerSize': <number>, // Optional
       'markerShadowSize': <number>, // Optional
-      'readOnly': <boolean>
+      'readOnly': <boolean>,
+      'scaleWidth': <number>, // Optional
+      'scaleHeight': <number> // Optional
  }
 ```
 
