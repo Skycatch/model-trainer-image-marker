@@ -507,8 +507,8 @@ class ModelTrainerImageMarker {
   resetDimentions() {
 
     if (this.cartesianSystem) {
-      this.width = parseFloat(this.cartesianSystem.style('width'));
-      this.height = parseFloat(this.cartesianSystem.style('height'));
+      this.width = this.cartesianSystem.node().getBoundingClientRect().width;
+      this.height = this.cartesianSystem.node().getBoundingClientRect().height;
     }
   }
 }
