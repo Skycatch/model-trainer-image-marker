@@ -23,7 +23,7 @@ To use the bundled styles, they can be found in the  `dist` folder of the node_m
 
 ## Interface
 
-Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](API)
+Pass in an in-memory Image object using the [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image)
 
 URL can either be a http image url, or created from an in memory file with `window.URL.createObjectURL`.  Remember to delete the file from your 
 
@@ -57,7 +57,7 @@ img.src = url;
 
 * `poiId` - _String_: UID of object of interest
 
-**MarkerSystem.configure(options)** - _JSON_: Configuration optinos
+**MarkerSystem.configure(options)** - _JSON_: Configuration options
 
 * `options`
 
@@ -69,7 +69,9 @@ img.src = url;
       'scaleLocateZoom': <number>, // Optional
       'markerSize': <number>, // Optional
       'markerShadowSize': <number>, // Optional
-      'readOnly': <boolean>
+      'readOnly': <boolean>,
+      'scaleWidth': <number>, // Optional
+      'scaleHeight': <number> // Optional
  }
 ```
 

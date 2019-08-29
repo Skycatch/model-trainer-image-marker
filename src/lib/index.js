@@ -24,7 +24,9 @@ const KOptionsList = [
   'scaleLocateZoom', // how far it autozooms into a mark
   'markerSize',
   'markerShadowSize',
-  'readOnly' // none of the clicking does anything
+  'readOnly', // none of the clicking does anything,
+  'scaleWidth', // size of the x axis scale
+  'scaleHeight' // size of the y axis scale
 ];
 const kScaleMin = .09;
 const kScaleMax = 20;
@@ -78,7 +80,7 @@ class ModelTrainerImageMarker {
 
     /* Superset */
     /*
-      { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize, viewOnly }
+      { targetIcon, scaleMin, scaleMax, scaleLocateZoom, markerSize, markerShadowSize, viewOnly, scaleWidth, scaleHeight }
     */
 
     options = options || {};
@@ -99,6 +101,8 @@ class ModelTrainerImageMarker {
     this.optionMarkerSize = options.markerSize ? options.markerSize : (this.optionMarkerSize ? this.optionMarkerSize : kMarkerSize);
     this.optionMarkerShadowSize =  options.markerShadowSize ? options.markerShadowSize : (this.optionMarkerShadowSize ? this.optionMarkerShadowSize : kMarkerShadowSize);
     this.optionReadOnly = options.readOnly ? options.readOnly : (this.optionReadOnly ? this.optionReadOnly : kReadOnlyMode);
+    this.optionScaleWidth = options.scaleWidth ? options.scaleWidth : this.optionScaleWidth
+    this.optionScaleHeigh = options.scaleHeight ? options.scaleHeight : this.optionScaleHeigh
   }
 
   // Zooms backwards to a hollistic perspective
@@ -397,17 +401,16 @@ class ModelTrainerImageMarker {
 
   // Initialize System
   _init () {
-
     this.configure();
     // X Scaling Behavior
     this.xScale = d3.scaleLinear()
-      .domain([-1, this.img.width + 1])
-      .range([-1, this.img.width + 1]);
+      .domain([-1, (this.optionScaleWidth ? this.optionScaleWidth : this.img.width) + 1])
+      .range([-1, (this.optionScaleWidth ? this.optionScaleWidth : this.img.width) + 1]);
 
     // Y Scaling Behavior
     this.yScale = d3.scaleLinear()
-      .domain([-1, this.img.height + 1])
-      .range([-1, this.img.height + 1]);
+      .domain([-1, (this.optionScaleHeight ? this.optionScaleHeight : this.img.width) + 1])
+      .range([-1, (this.optionScaleHeight ? this.optionScaleHeight : this.img.width) + 1]);
 
     // X Axis Rules
     this.xAxis = d3.axisBottom(this.xScale)

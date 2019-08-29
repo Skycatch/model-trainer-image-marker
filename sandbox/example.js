@@ -9,7 +9,7 @@ const d3Target3 = '#system3';
 /* with the way webpack serves the sandbox files                   */
 /*******************************************************************/
 
-const ModelTrainerImageMarker = window['@skycatch/model-trainer-image-marker'];
+const ModelTrainerImageMarker = window['@skycatch/model-trainer-image-marker'].default;
 
 const internals = {};
 internals.CanvasSystem = [];
