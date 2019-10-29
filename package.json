@@ -43,7 +43,7 @@
     "stylelint-selector-bem-pattern": "^1.1.1",
     "stylelint-webpack-plugin": "^0.10.3",
     "webpack": "^4.8.0",
-    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^2.1.x",
     "webpack-dev-server": "^3.1.0"
   },
